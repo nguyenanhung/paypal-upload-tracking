@@ -24,7 +24,7 @@ interface ProjectEnvironment
     const AUTHOR_EMAIL  = 'dev@nguyenanhung.com';
     const AUTHOR_URL    = 'https://nguyenanhung.com';
     const USE_BENCHMARK = FALSE;
-    const SDK_CACHE_KEY = '2EBC734DEC99AC69';
+    const SDK_CACHE_KEY = '81205765200257859';
 
     /**
      * Function getVersion

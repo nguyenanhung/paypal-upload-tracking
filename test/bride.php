@@ -9,12 +9,13 @@
  */
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use nguyenanhung\PayPal\UploadTracking\Services\PayPal\Tracking\Tracking;
+use nguyenanhung\PayPal\UploadTracking\Services\PaygateBride\BrideTracking;
 
 $sdkConfig = [
     'partnerId'   => '',
     'prefix'      => '',
     'secretToken' => '',
+    'hostname'    => ''
 ];
 
 $clientId                 = '';
@@ -25,16 +26,14 @@ $trackingCarrier          = '';
 $trackingCarrierNameOther = '';
 $fulfillmentStatus        = '';
 
-$tracking = new Tracking();
+$tracking = new BrideTracking();
 $tracking->setSdkConfig($sdkConfig)
-         ->setClientId($clientId)
-         ->setSecretId($secretId)
+         ->setRequestId(uniqid())
          ->setTransactionId($transactionId)
          ->setTrackingNumber($trackingNumber)
          ->setTrackingCarrier($trackingCarrier)
          ->setTrackingCarrierNameOther($trackingCarrierNameOther)
-         ->setFulfillmentStatus($fulfillmentStatus)
-         ->requestAccessToken();
+         ->setFulfillmentStatus($fulfillmentStatus);
 
 echo "<pre>";
 print_r($tracking->uploadTracking());
