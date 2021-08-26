@@ -1,0 +1,33 @@
+{
+    "name": "nguyenanhung/paypal-upload-tracking",
+    "type": "library",
+    "description": "PayPal - Upload Tracking",
+    "keywords": [
+        "php",
+        "gateway",
+        "api",
+        "payment",
+        "paypage"
+    ],
+    "homepage": "https://github.com/nguyenanhung/paypal-upload-tracking",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Nguyen An Hung",
+            "email": "dev@nguyenanhung.com",
+            "homepage": "https://nguyenanhung.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "ext-json": "*",
+        "ext-curl": "*",
+        "php-curl-class/php-curl-class": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "nguyenanhung\\PayPal\\UploadTracking\\": "src/"
+        }
+    }
+}
