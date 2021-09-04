@@ -6,7 +6,9 @@ Change Log được viết theo biểu mẫu tại đây: https://keepachangelog
 
 ## [1.0.1] - 2021/09/04
 
-## Add
+## Fixed
+
+- [x] Fix lỗi upload tracking lên PayPal không detect được response
 
 ## [1.0.0] - 2021/08/27
 
