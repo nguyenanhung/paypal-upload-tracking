@@ -239,7 +239,7 @@ class PaypalREST extends BaseCore
         if (is_object($result) || is_array($result)) {
             $result = json_encode($result);
         }
-        $res = json_decode($result);
+        $res = json_decode(trim($result));
         if (isset($res->access_token)) {
             $this->accessToken = $res->access_token;
         } else {
@@ -255,23 +255,24 @@ class PaypalREST extends BaseCore
      * @param string $url
      * @param array  $data
      * @param string $method
+     * @param int    $timeout
      *
      * @return array
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/24/2021 01:59
+     * @time     : 09/05/2021 24:37
      */
-    public function sendRequest($url = '', $data = array(), $method = 'JSON')
+    public function sendRequest($url = '', $data = array(), $method = 'JSON', $timeout = 60)
     {
         $getMethod = strtoupper($method);
-        // Curl
-        $curl = new Curl();
+        $curl      = new Curl();
         $curl->setOpt(CURLOPT_RETURNTRANSFER, true);
+        $curl->setOpt(CURLOPT_FOLLOWLOCATION, true);
         $curl->setOpt(CURLOPT_SSL_VERIFYPEER, false);
+        $curl->setOpt(CURLOPT_SSL_VERIFYHOST, false);
         $curl->setOpt(CURLOPT_ENCODING, "utf-8");
         $curl->setOpt(CURLOPT_MAXREDIRS, 10);
-        $curl->setOpt(CURLOPT_TIMEOUT, 60);
-        // Request
+        $curl->setOpt(CURLOPT_TIMEOUT, $timeout);
         if ('POST' == $getMethod) {
             $curl->post($url, $data);
         } elseif ('JSON' == $getMethod) {
@@ -285,15 +286,28 @@ class PaypalREST extends BaseCore
         } else {
             $curl->get($url, $data);
         }
-        // Response
-        $response = $curl->error ? "cURL Error: " . $curl->errorMessage : $curl->response;
+
+        // Đoạn xử lý này nhằm polyfill namespace Curl\Curl
+        if ($curl->error) {
+            $response = "cURL Error: " . $curl->errorMessage;
+        } else {
+            $response = $curl->response;
+        }
+        if (isset($curl->httpStatusCode)) {
+            $httpStatusCode = $curl->httpStatusCode;
+        } elseif (isset($curl->http_status_code)) {
+            $httpStatusCode = $curl->http_status_code;
+        } else {
+            $httpStatusCode = 0;
+        }
+
         // Close Request
         $curl->close();
 
         // Return Response
         return [
             "response"       => $response,
-            "httpStatusCode" => $curl->httpStatusCode
+            "httpStatusCode" => $httpStatusCode
         ];
     }
 

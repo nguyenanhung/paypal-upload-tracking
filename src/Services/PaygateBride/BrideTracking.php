@@ -61,12 +61,12 @@ class BrideTracking extends BaseCore
     {
         try {
             $curl = new Curl();
-            $curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
-            $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
+            $curl->setOpt(CURLOPT_RETURNTRANSFER, true);
+            $curl->setOpt(CURLOPT_SSL_VERIFYPEER, false);
             $curl->setOpt(CURLOPT_ENCODING, "utf-8");
             $curl->setOpt(CURLOPT_MAXREDIRS, 10);
             $curl->setOpt(CURLOPT_TIMEOUT, 300);
-            $curl->setOpt(CURLOPT_FOLLOWLOCATION, TRUE);
+            $curl->setOpt(CURLOPT_FOLLOWLOCATION, true);
             if ('POST' == $method) {
                 $curl->post($url, $data);
             } else {
@@ -76,9 +76,8 @@ class BrideTracking extends BaseCore
             $curl->close();
 
             return $response;
-        }
-        catch (Exception $e) {
-            return NULL;
+        } catch (Exception $e) {
+            return null;
         }
     }
 
@@ -228,17 +227,18 @@ class BrideTracking extends BaseCore
      */
     public function uploadTracking()
     {
+        $path        = '/api/v1/uploadTracking';
         $hostname    = $this->sdkConfig['hostname'];
         $prefix      = $this->sdkConfig['prefix'];
         $secretToken = $this->sdkConfig['secretToken'];
         $partnerId   = $this->sdkConfig['partnerId'];
-        if ($this->sandbox === TRUE || $this->sandbox === 'YES') {
+        if ($this->sandbox === true || $this->sandbox === 'YES') {
             $sandbox = 'YES';
         } else {
             $sandbox = 'NO';
         }
         $signature = hash('sha1', $this->requestId . $prefix . $partnerId . $prefix . $secretToken);
-        $url       = $hostname . '/api/v1/uploadTracking';
+        $url       = $hostname . $path;
         $params    = [
             'requestId'        => $this->requestId,
             'partnerId'        => $partnerId,
@@ -251,7 +251,10 @@ class BrideTracking extends BaseCore
             'sandbox'          => $sandbox
         ];
         $request   = $this->sendRequest($url, $params);
-        $res       = json_decode($request);
+        if (is_array($request) || is_object($request)) {
+            $request = json_encode($request);
+        }
+        $res = json_decode(trim($request));
         if (isset($res->code) && $res->code === self::EXIT_SUCCESS) {
             $response = [
                 'code'    => self::EXIT_SUCCESS,

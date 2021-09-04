@@ -107,7 +107,7 @@ class Tracking extends PaypalREST implements TrackingInterface
         $uploadTracking = $this->trackers($this->transactionId, $this->trackingNumber, $dataTracking);
 
         // Prepare tracking update
-        if ($uploadTracking['httpStatusCode'] != 204) {
+        if ($uploadTracking['httpStatusCode'] > 204 || $uploadTracking['httpStatusCode'] < 200) {
             $exitCode              = self::EXIT_ERROR;
             $uploadTrackingMessage = "Upload Tracking for TransactionID: " . $this->transactionId . " has Error";
             $uploadTrackingStatus  = 'error';
@@ -152,7 +152,7 @@ class Tracking extends PaypalREST implements TrackingInterface
         $uploadTracking = $this->trackersBatch($this->multiTransactionData);
 
         // Prepare tracking update
-        if ($uploadTracking['httpStatusCode'] != 204) {
+        if ($uploadTracking['httpStatusCode'] > 204 || $uploadTracking['httpStatusCode'] < 200) {
             $exitCode              = self::EXIT_ERROR;
             $uploadTrackingMessage = "Upload Multi Tracking for has Error";
             $uploadTrackingStatus  = 'error';
