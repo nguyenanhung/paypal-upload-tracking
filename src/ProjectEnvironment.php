@@ -19,12 +19,10 @@ namespace nguyenanhung\PayPal\UploadTracking;
  */
 interface ProjectEnvironment
 {
-    const VERSION       = '1.0.0';
-    const AUTHOR_NAME   = 'Hung Nguyen';
-    const AUTHOR_EMAIL  = 'dev@nguyenanhung.com';
-    const AUTHOR_URL    = 'https://nguyenanhung.com';
-    const USE_BENCHMARK = FALSE;
-    const SDK_CACHE_KEY = '81205765200257859';
+    const VERSION      = '1.0.1';
+    const AUTHOR_NAME  = 'Hung Nguyen';
+    const AUTHOR_EMAIL = 'dev@nguyenanhung.com';
+    const AUTHOR_URL   = 'https://nguyenanhung.com';
 
     /**
      * Function getVersion

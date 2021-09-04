@@ -33,7 +33,7 @@ class PaypalREST extends BaseCore
     protected $secretId;
     protected $accessToken;
     /** @var bool $hasError */
-    protected $hasError = FALSE;
+    protected $hasError = false;
 
     /**
      * PaypalREST constructor.
@@ -58,10 +58,10 @@ class PaypalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/24/2021 41:41
      */
-    public function setSandbox($sandbox = FALSE)
+    public function setSandbox($sandbox = false)
     {
         $this->sandbox = $sandbox;
-        if ($this->sandbox === TRUE) {
+        if ($this->sandbox === true) {
             $this->restEndpoint = PaypalConstants::PAYPAL_REST_SANDBOX_HOSTNAME;
         } else {
             $this->restEndpoint = PaypalConstants::PAYPAL_REST_HOSTNAME;
@@ -213,29 +213,37 @@ class PaypalREST extends BaseCore
      */
     public function requestAccessToken()
     {
-        if ($this->sandbox === TRUE) {
+        if ($this->sandbox === true) {
             $url = PaypalConstants::PAYPAL_REST_SANDBOX_HOSTNAME . '/v1/oauth2/token';
         } else {
             $url = PaypalConstants::PAYPAL_REST_HOSTNAME . '/v1/oauth2/token';
         }
         $params = ['grant_type' => 'client_credentials'];
         $curl   = new Curl();
-        $curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
-        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
+        $curl->setOpt(CURLOPT_RETURNTRANSFER, true);
+        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, false);
         $curl->setOpt(CURLOPT_ENCODING, "utf-8");
         $curl->setOpt(CURLOPT_MAXREDIRS, 10);
         $curl->setOpt(CURLOPT_TIMEOUT, 60);
         $curl->setBasicAuthentication($this->clientId, $this->secretId);
         $curl->post($url, $params);
         // Response
-        $result = $curl->error ? "cURL Error: " . $curl->errorMessage : $curl->response;
+        if ($curl->error) {
+            $result = "cURL Error: " . $curl->errorMessage;
+        } else {
+            $result = $curl->rawResponse ?? $curl->response;
+        }
         // Close Request
         $curl->close();
+
+        if (is_object($result) || is_array($result)) {
+            $result = json_encode($result);
+        }
         $res = json_decode($result);
         if (isset($res->access_token)) {
             $this->accessToken = $res->access_token;
         } else {
-            $this->accessToken = NULL;
+            $this->accessToken = null;
         }
 
         return $this;
@@ -258,8 +266,8 @@ class PaypalREST extends BaseCore
         $getMethod = strtoupper($method);
         // Curl
         $curl = new Curl();
-        $curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
-        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
+        $curl->setOpt(CURLOPT_RETURNTRANSFER, true);
+        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, false);
         $curl->setOpt(CURLOPT_ENCODING, "utf-8");
         $curl->setOpt(CURLOPT_MAXREDIRS, 10);
         $curl->setOpt(CURLOPT_TIMEOUT, 60);
