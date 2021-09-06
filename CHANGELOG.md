@@ -4,6 +4,12 @@
 
 Change Log được viết theo biểu mẫu tại đây: https://keepachangelog.com/en/1.0.0/
 
+## [1.0.2] - 2021/09/06
+
+## Update
+
+- [x] Cung cấp thư viện với đầy đủ các hàm liên kết tới API Tracking của PayPal
+
 ## [1.0.1] - 2021/09/04
 
 ## Fixed
