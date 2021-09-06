@@ -14,23 +14,28 @@ use Curl\Curl;
 use nguyenanhung\PayPal\UploadTracking\Base\BaseCore;
 
 /**
- * Class PaypalREST
+ * Class PayPalREST
  *
- * @package   nguyenanhung\PHPPaygateFramework\Services\Paypal
+ * @package   nguyenanhung\PayPal\UploadTracking\Services\PayPal
  * @author    713uk13m <dev@nguyenanhung.com>
  * @copyright 713uk13m <dev@nguyenanhung.com>
  */
-class PaypalREST extends BaseCore
+class PayPalREST extends BaseCore
 {
     const PARTNER_IS_ON = 'on';
     const USE_IS_YES    = 'yes';
 
-    use PaypalServicesTrait;
+    use PayPalServicesTrait;
 
+    /** @var bool $sandbox */
     protected $sandbox;
+    /** @var string $restEndpoint */
     protected $restEndpoint;
+    /** @var string $clientId */
     protected $clientId;
+    /** @var string $secretId */
     protected $secretId;
+    /** @var string $accessToken */
     protected $accessToken;
     /** @var bool $hasError */
     protected $hasError = false;
@@ -73,10 +78,10 @@ class PaypalREST extends BaseCore
     /**
      * Function getSandbox
      *
-     * @return mixed
+     * @return bool
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/24/2021 41:45
+     * @time     : 09/06/2021 18:27
      */
     public function getSandbox()
     {
@@ -103,10 +108,10 @@ class PaypalREST extends BaseCore
     /**
      * Function getRestEndpoint
      *
-     * @return mixed
+     * @return string
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/24/2021 14:22
+     * @time     : 09/06/2021 18:23
      */
     public function getRestEndpoint()
     {
@@ -133,10 +138,10 @@ class PaypalREST extends BaseCore
     /**
      * Function getClientId
      *
-     * @return mixed
+     * @return string
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/24/2021 41:53
+     * @time     : 09/06/2021 18:19
      */
     public function getClientId()
     {
@@ -163,10 +168,10 @@ class PaypalREST extends BaseCore
     /**
      * Function getSecretId
      *
-     * @return mixed
+     * @return string
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/24/2021 42:02
+     * @time     : 09/06/2021 18:10
      */
     public function getSecretId()
     {
@@ -176,10 +181,10 @@ class PaypalREST extends BaseCore
     /**
      * Function getAccessToken
      *
-     * @return mixed
+     * @return string
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/24/2021 46:14
+     * @time     : 09/06/2021 18:15
      */
     public function getAccessToken()
     {
@@ -228,23 +233,12 @@ class PaypalREST extends BaseCore
         $curl->setBasicAuthentication($this->clientId, $this->secretId);
         $curl->post($url, $params);
         // Response
-        if ($curl->error) {
-            $result = "cURL Error: " . $curl->errorMessage;
-        } else {
-            $result = $curl->rawResponse ?? $curl->response;
-        }
+        $rawResponse = $curl->rawResponse ?? $curl->response;
+        $result      = $curl->error ? "cURL Error: " . $curl->errorMessage : $rawResponse;
         // Close Request
         $curl->close();
-
-        if (is_object($result) || is_array($result)) {
-            $result = json_encode($result);
-        }
-        $res = json_decode(trim($result));
-        if (isset($res->access_token)) {
-            $this->accessToken = $res->access_token;
-        } else {
-            $this->accessToken = null;
-        }
+        $res               = json_decode(trim($result));
+        $this->accessToken = $res->access_token ?? null;
 
         return $this;
     }
@@ -288,11 +282,9 @@ class PaypalREST extends BaseCore
         }
 
         // Đoạn xử lý này nhằm polyfill namespace Curl\Curl
-        if ($curl->error) {
-            $response = "cURL Error: " . $curl->errorMessage;
-        } else {
-            $response = $curl->response;
-        }
+
+        $rawResponse = $curl->rawResponse ?? $curl->response;
+        $response    = $curl->error ? "cURL Error: " . $curl->errorMessage : $rawResponse;
         if (isset($curl->httpStatusCode)) {
             $httpStatusCode = $curl->httpStatusCode;
         } elseif (isset($curl->http_status_code)) {
@@ -307,6 +299,7 @@ class PaypalREST extends BaseCore
         // Return Response
         return [
             "response"       => $response,
+            "rawResponse"    => $rawResponse,
             "httpStatusCode" => $httpStatusCode
         ];
     }

@@ -10,7 +10,7 @@
 
 namespace nguyenanhung\PayPal\UploadTracking\Services\PayPal\Tracking;
 
-use nguyenanhung\PayPal\UploadTracking\Services\PayPal\PaypalREST;
+use nguyenanhung\PayPal\UploadTracking\Services\PayPal\PayPalREST;
 
 /**
  * Class Tracking - Class cung cấp phương thức hỗ trợ đẩy tracking Paypal
@@ -19,7 +19,7 @@ use nguyenanhung\PayPal\UploadTracking\Services\PayPal\PaypalREST;
  * @author    713uk13m <dev@nguyenanhung.com>
  * @copyright 713uk13m <dev@nguyenanhung.com>
  */
-class Tracking extends PaypalREST implements TrackingInterface
+class Tracking extends PayPalREST implements TrackingInterface
 {
     protected $multiTransactionData;
     protected $transactionId;
@@ -39,6 +39,108 @@ class Tracking extends PaypalREST implements TrackingInterface
     public function __construct(array $options = array())
     {
         parent::__construct($options);
+    }
+
+    /**
+     * Function setMultiTransactionData
+     *
+     * @param $multiTransactionData
+     *
+     * @return $this
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/27/2021 46:39
+     */
+    public function setMultiTransactionData($multiTransactionData)
+    {
+        $this->multiTransactionData = $multiTransactionData;
+
+        return $this;
+    }
+
+    /**
+     * Function setTransactionId
+     *
+     * @param $transactionId
+     *
+     * @return $this
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/27/2021 46:36
+     */
+    public function setTransactionId($transactionId)
+    {
+        $this->transactionId = $transactionId;
+
+        return $this;
+    }
+
+    /**
+     * Function setTrackingNumber
+     *
+     * @param $trackingNumber
+     *
+     * @return $this
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/27/2021 46:32
+     */
+    public function setTrackingNumber($trackingNumber)
+    {
+        $this->trackingNumber = $trackingNumber;
+
+        return $this;
+    }
+
+    /**
+     * Function setFulfillmentStatus
+     *
+     * @param $fulfillmentStatus
+     *
+     * @return $this
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/27/2021 46:30
+     */
+    public function setFulfillmentStatus($fulfillmentStatus)
+    {
+        $this->fulfillmentStatus = $fulfillmentStatus;
+
+        return $this;
+    }
+
+    /**
+     * Function setTrackingCarrier
+     *
+     * @param $trackingCarrier
+     *
+     * @return $this
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/27/2021 46:27
+     */
+    public function setTrackingCarrier($trackingCarrier)
+    {
+        $this->trackingCarrier = $trackingCarrier;
+
+        return $this;
+    }
+
+    /**
+     * Function setTrackingCarrierNameOther
+     *
+     * @param $trackingCarrierNameOther
+     *
+     * @return $this
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/27/2021 46:23
+     */
+    public function setTrackingCarrierNameOther($trackingCarrierNameOther)
+    {
+        $this->trackingCarrierNameOther = $trackingCarrierNameOther;
+
+        return $this;
     }
 
     /**
@@ -171,108 +273,6 @@ class Tracking extends PaypalREST implements TrackingInterface
             'data'           => $uploadTracking['response']
         ];
         $this->response = $response;
-
-        return $this;
-    }
-
-    /**
-     * Function setMultiTransactionData
-     *
-     * @param $multiTransactionData
-     *
-     * @return $this
-     * @author   : 713uk13m <dev@nguyenanhung.com>
-     * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/27/2021 46:39
-     */
-    public function setMultiTransactionData($multiTransactionData)
-    {
-        $this->multiTransactionData = $multiTransactionData;
-
-        return $this;
-    }
-
-    /**
-     * Function setTransactionId
-     *
-     * @param $transactionId
-     *
-     * @return $this
-     * @author   : 713uk13m <dev@nguyenanhung.com>
-     * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/27/2021 46:36
-     */
-    public function setTransactionId($transactionId)
-    {
-        $this->transactionId = $transactionId;
-
-        return $this;
-    }
-
-    /**
-     * Function setTrackingNumber
-     *
-     * @param $trackingNumber
-     *
-     * @return $this
-     * @author   : 713uk13m <dev@nguyenanhung.com>
-     * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/27/2021 46:32
-     */
-    public function setTrackingNumber($trackingNumber)
-    {
-        $this->trackingNumber = $trackingNumber;
-
-        return $this;
-    }
-
-    /**
-     * Function setFulfillmentStatus
-     *
-     * @param $fulfillmentStatus
-     *
-     * @return $this
-     * @author   : 713uk13m <dev@nguyenanhung.com>
-     * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/27/2021 46:30
-     */
-    public function setFulfillmentStatus($fulfillmentStatus)
-    {
-        $this->fulfillmentStatus = $fulfillmentStatus;
-
-        return $this;
-    }
-
-    /**
-     * Function setTrackingCarrier
-     *
-     * @param $trackingCarrier
-     *
-     * @return $this
-     * @author   : 713uk13m <dev@nguyenanhung.com>
-     * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/27/2021 46:27
-     */
-    public function setTrackingCarrier($trackingCarrier)
-    {
-        $this->trackingCarrier = $trackingCarrier;
-
-        return $this;
-    }
-
-    /**
-     * Function setTrackingCarrierNameOther
-     *
-     * @param $trackingCarrierNameOther
-     *
-     * @return $this
-     * @author   : 713uk13m <dev@nguyenanhung.com>
-     * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/27/2021 46:23
-     */
-    public function setTrackingCarrierNameOther($trackingCarrierNameOther)
-    {
-        $this->trackingCarrierNameOther = $trackingCarrierNameOther;
 
         return $this;
     }

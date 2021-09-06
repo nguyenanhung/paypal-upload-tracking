@@ -11,13 +11,13 @@
 namespace nguyenanhung\PayPal\UploadTracking\Services\PayPal;
 
 /**
- * Trait PaypalServicesTrait
+ * Trait PayPalServicesTrait
  *
  * @package   nguyenanhung\PayPal\UploadTracking\Services\PayPal
  * @author    713uk13m <dev@nguyenanhung.com>
  * @copyright 713uk13m <dev@nguyenanhung.com>
  */
-trait PaypalServicesTrait
+trait PayPalServicesTrait
 {
     /**
      * Function hasError
