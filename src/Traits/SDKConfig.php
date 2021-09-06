@@ -46,7 +46,7 @@ trait SDKConfig
             return $this->sdkConfig['OPTIONS'];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -63,7 +63,7 @@ trait SDKConfig
             return $this->sdkConfig['SERVICES'];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -80,7 +80,7 @@ trait SDKConfig
             return $this->sdkConfig['PAYGATE'];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -98,7 +98,7 @@ trait SDKConfig
             return $options['showConfirmHash'];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -114,10 +114,6 @@ trait SDKConfig
     public function setSdkConfig(array $sdkConfig)
     {
         $this->sdkConfig = $sdkConfig;
-        if (isset($this->db)) {
-            $this->db->setSdkConfig($this->sdkConfig);
-            $this->db->__construct($this->sdkConfig['OPTIONS']);
-        }
 
         return $this;
     }
