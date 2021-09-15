@@ -1,7 +1,6 @@
 # PayPal - Upload Tracking
 
-[![Latest Stable Version](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/v)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![Total Downloads](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/downloads)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![Latest Unstable Version](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/v/unstable)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![License](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/license)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking)
-
+[![Latest Stable Version](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/v)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![Total Downloads](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/downloads)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![Latest Unstable Version](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/v/unstable)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![License](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/license)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![PHP Version Require](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/require/php)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking)
 Thư viện được thiết kế hỗ trợ duy nhất 1 việc Upload Tracking lên PayPal
 
 Thư viện được xây dựng dựa trên tài liệu chính thức của PayPal tại địa chỉ: https://developer.paypal.com/docs/api/tracking/v1/
