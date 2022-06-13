@@ -4,6 +4,12 @@
 
 Change Log được viết theo biểu mẫu tại đây: https://keepachangelog.com/en/1.0.0/
 
+## [1.0.3] - 2022/06/13
+
+## Update
+
+- [x] Refactoring phần request tới API của PayPal
+
 ## [1.0.2] - 2021/09/06
 
 ## Update
@@ -32,5 +38,5 @@ Hướng dẫn sử dụng: Tham khảo thư mục `examples/`
 ## Liên hệ
 
 | Name        | Email                | Skype            | Facebook      |
-| ----------- | -------------------- | ---------------- | ------------- |
+|-------------|----------------------|------------------|---------------|
 | Hung Nguyen | dev@nguyenanhung.com | nguyenanhung5891 | @nguyenanhung |

@@ -76,5 +76,5 @@ Phân phối theo giấy phép: GNU GENERAL PUBLIC LICENSE
 ## Liên hệ
 
 | Name        | Email                | Skype            | Facebook      |
-| ----------- | -------------------- | ---------------- | ------------- |
+|-------------|----------------------|------------------|---------------|
 | Hung Nguyen | dev@nguyenanhung.com | nguyenanhung5891 | @nguyenanhung |

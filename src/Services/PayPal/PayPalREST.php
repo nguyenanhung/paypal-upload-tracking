@@ -56,14 +56,14 @@ class PayPalREST extends BaseCore
     /**
      * Function setSandbox
      *
-     * @param false $sandbox
+     * @param bool $sandbox
      *
      * @return $this
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/24/2021 41:41
      */
-    public function setSandbox($sandbox = false)
+    public function setSandbox(bool $sandbox = false): PayPalREST
     {
         $this->sandbox = $sandbox;
         if ($this->sandbox === true) {
@@ -83,7 +83,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 09/06/2021 18:27
      */
-    public function getSandbox()
+    public function getSandbox(): bool
     {
         return $this->sandbox;
     }
@@ -98,7 +98,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/24/2021 15:44
      */
-    public function setRestEndpoint($restEndpoint)
+    public function setRestEndpoint($restEndpoint): PayPalREST
     {
         $this->restEndpoint = $restEndpoint;
 
@@ -113,7 +113,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 09/06/2021 18:23
      */
-    public function getRestEndpoint()
+    public function getRestEndpoint(): string
     {
         return $this->restEndpoint;
     }
@@ -128,7 +128,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/24/2021 41:49
      */
-    public function setClientId($clientId)
+    public function setClientId($clientId): PayPalREST
     {
         $this->clientId = $clientId;
 
@@ -143,7 +143,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 09/06/2021 18:19
      */
-    public function getClientId()
+    public function getClientId(): string
     {
         return $this->clientId;
     }
@@ -158,7 +158,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/24/2021 41:58
      */
-    public function setSecretId($secretId)
+    public function setSecretId($secretId): PayPalREST
     {
         $this->secretId = $secretId;
 
@@ -173,7 +173,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 09/06/2021 18:10
      */
-    public function getSecretId()
+    public function getSecretId(): string
     {
         return $this->secretId;
     }
@@ -186,7 +186,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 09/06/2021 18:15
      */
-    public function getAccessToken()
+    public function getAccessToken(): string
     {
         return $this->accessToken;
     }
@@ -201,7 +201,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/24/2021 49:15
      */
-    public function setAccessToken($accessToken)
+    public function setAccessToken($accessToken): PayPalREST
     {
         $this->accessToken = $accessToken;
 
@@ -216,7 +216,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/24/2021 01:43
      */
-    public function requestAccessToken()
+    public function requestAccessToken(): PayPalREST
     {
         if ($this->sandbox === true) {
             $url = PaypalConstants::PAYPAL_REST_SANDBOX_HOSTNAME . '/v1/oauth2/token';
@@ -246,20 +246,21 @@ class PayPalREST extends BaseCore
     /**
      * Function sendRequest
      *
-     * @param string $url
-     * @param array  $data
-     * @param string $method
-     * @param int    $timeout
+     * @param string       $url
+     * @param array|string $data
+     * @param string       $method
+     * @param int          $timeout
      *
      * @return array
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 09/05/2021 24:37
      */
-    public function sendRequest($url = '', $data = array(), $method = 'JSON', $timeout = 60)
+    public function sendRequest(string $url = '', $data = array(), string $method = 'JSON', int $timeout = 60): array
     {
         $getMethod = strtoupper($method);
         $curl      = new Curl();
+
         $curl->setOpt(CURLOPT_RETURNTRANSFER, true);
         $curl->setOpt(CURLOPT_FOLLOWLOCATION, true);
         $curl->setOpt(CURLOPT_SSL_VERIFYPEER, false);
@@ -267,6 +268,7 @@ class PayPalREST extends BaseCore
         $curl->setOpt(CURLOPT_ENCODING, "utf-8");
         $curl->setOpt(CURLOPT_MAXREDIRS, 10);
         $curl->setOpt(CURLOPT_TIMEOUT, $timeout);
+
         if ('POST' == $getMethod) {
             $curl->post($url, $data);
         } elseif ('JSON' == $getMethod) {
@@ -315,7 +317,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/26/2021 36:26
      */
-    protected function exceptionResponseParse($method, $exception)
+    protected function exceptionResponseParse($method, $exception): array
     {
         return [
             'code'    => self::EXIT_ERROR,
@@ -340,7 +342,7 @@ class PayPalREST extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/26/2021 45:03
      */
-    protected function errorResponseParse($code, $step, $message)
+    protected function errorResponseParse($code, $step, $message): array
     {
         return [
             'code'    => $code,

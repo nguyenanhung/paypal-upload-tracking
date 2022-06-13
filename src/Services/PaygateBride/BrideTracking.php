@@ -48,16 +48,16 @@ class BrideTracking extends BaseCore
     /**
      * Function sendRequest
      *
-     * @param string $url
-     * @param array  $data
-     * @param string $method
+     * @param string       $url
+     * @param array|string $data
+     * @param string       $method
      *
      * @return string|null
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/27/2021 03:22
      */
-    protected function sendRequest($url = '', $data = array(), $method = 'GET')
+    protected function sendRequest(string $url = '', $data = array(), string $method = 'GET')
     {
         try {
             $curl = new Curl();
@@ -67,6 +67,7 @@ class BrideTracking extends BaseCore
             $curl->setOpt(CURLOPT_MAXREDIRS, 10);
             $curl->setOpt(CURLOPT_TIMEOUT, 300);
             $curl->setOpt(CURLOPT_FOLLOWLOCATION, true);
+
             if ('POST' == $method) {
                 $curl->post($url, $data);
             } else {
@@ -91,7 +92,7 @@ class BrideTracking extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/27/2021 00:46
      */
-    public function setSandbox($sandbox)
+    public function setSandbox($sandbox): BrideTracking
     {
         $this->sandbox = $sandbox;
 
@@ -108,7 +109,7 @@ class BrideTracking extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/27/2021 46:39
      */
-    public function setMultiTransactionData($multiTransactionData)
+    public function setMultiTransactionData($multiTransactionData): BrideTracking
     {
         $this->multiTransactionData = $multiTransactionData;
 
@@ -125,7 +126,7 @@ class BrideTracking extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/27/2021 46:36
      */
-    public function setTransactionId($transactionId)
+    public function setTransactionId($transactionId): BrideTracking
     {
         $this->transactionId = $transactionId;
 
@@ -142,7 +143,7 @@ class BrideTracking extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/27/2021 46:32
      */
-    public function setTrackingNumber($trackingNumber)
+    public function setTrackingNumber($trackingNumber): BrideTracking
     {
         $this->trackingNumber = $trackingNumber;
 
@@ -159,7 +160,7 @@ class BrideTracking extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/27/2021 46:30
      */
-    public function setFulfillmentStatus($fulfillmentStatus)
+    public function setFulfillmentStatus($fulfillmentStatus): BrideTracking
     {
         $this->fulfillmentStatus = $fulfillmentStatus;
 
@@ -176,7 +177,7 @@ class BrideTracking extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/27/2021 46:27
      */
-    public function setTrackingCarrier($trackingCarrier)
+    public function setTrackingCarrier($trackingCarrier): BrideTracking
     {
         $this->trackingCarrier = $trackingCarrier;
 
@@ -193,7 +194,7 @@ class BrideTracking extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/27/2021 46:23
      */
-    public function setTrackingCarrierNameOther($trackingCarrierNameOther)
+    public function setTrackingCarrierNameOther($trackingCarrierNameOther): BrideTracking
     {
         $this->trackingCarrierNameOther = $trackingCarrierNameOther;
 
@@ -210,7 +211,7 @@ class BrideTracking extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/27/2021 53:47
      */
-    public function setRequestId($requestId)
+    public function setRequestId($requestId): BrideTracking
     {
         $this->requestId = $requestId;
 
@@ -225,7 +226,7 @@ class BrideTracking extends BaseCore
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/27/2021 06:39
      */
-    public function uploadTracking()
+    public function uploadTracking(): BrideTracking
     {
         $path        = '/api/v1/uploadTracking';
         $hostname    = $this->sdkConfig['hostname'];
