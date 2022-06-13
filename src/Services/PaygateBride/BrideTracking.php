@@ -11,8 +11,8 @@
 namespace nguyenanhung\PayPal\UploadTracking\Services\PaygateBride;
 
 use Exception;
-use Curl\Curl;
 use nguyenanhung\PayPal\UploadTracking\Base\BaseCore;
+use nguyenanhung\PayPal\UploadTracking\Curl\Curl;
 
 /**
  * Class BrideTracking
@@ -61,6 +61,7 @@ class BrideTracking extends BaseCore
     {
         try {
             $curl = new Curl();
+
             $curl->setOpt(CURLOPT_RETURNTRANSFER, true);
             $curl->setOpt(CURLOPT_SSL_VERIFYPEER, false);
             $curl->setOpt(CURLOPT_ENCODING, "utf-8");
@@ -73,7 +74,15 @@ class BrideTracking extends BaseCore
             } else {
                 $curl->get($url, $data);
             }
-            $response = $curl->error ? "cURL Error: " . $curl->errorMessage : $curl->response;
+            if ($curl->error) {
+                if (isset($curl->errorMessage)) {
+                    $response = "cURL Error: " . $curl->errorMessage;
+                } else {
+                    $response = "cURL Error: " . $curl->error_message;
+                }
+            } else {
+                $response = $curl->response;
+            }
             $curl->close();
 
             return $response;

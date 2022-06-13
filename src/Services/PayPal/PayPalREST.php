@@ -10,7 +10,7 @@
 
 namespace nguyenanhung\PayPal\UploadTracking\Services\PayPal;
 
-use Curl\Curl;
+use nguyenanhung\PayPal\UploadTracking\Curl\Curl;
 use nguyenanhung\PayPal\UploadTracking\Base\BaseCore;
 
 /**
@@ -234,7 +234,15 @@ class PayPalREST extends BaseCore
         $curl->post($url, $params);
         // Response
         $rawResponse = $curl->rawResponse ?? $curl->response;
-        $result      = $curl->error ? "cURL Error: " . $curl->errorMessage : $rawResponse;
+        if ($curl->error) {
+            if (isset($curl->errorMessage)) {
+                $result = "cURL Error: " . $curl->errorMessage;
+            } else {
+                $result = "cURL Error: " . $curl->error_message;
+            }
+        } else {
+            $result = $rawResponse;
+        }
         // Close Request
         $curl->close();
         $res               = json_decode(trim($result));
@@ -286,7 +294,15 @@ class PayPalREST extends BaseCore
         // Đoạn xử lý này nhằm polyfill namespace Curl\Curl
 
         $rawResponse = $curl->rawResponse ?? $curl->response;
-        $response    = $curl->error ? "cURL Error: " . $curl->errorMessage : $rawResponse;
+        if ($curl->error) {
+            if (isset($curl->errorMessage)) {
+                $response = "cURL Error: " . $curl->errorMessage;
+            } else {
+                $response = "cURL Error: " . $curl->error_message;
+            }
+        } else {
+            $response = $rawResponse;
+        }
         if (isset($curl->httpStatusCode)) {
             $httpStatusCode = $curl->httpStatusCode;
         } elseif (isset($curl->http_status_code)) {

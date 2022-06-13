@@ -22,8 +22,7 @@
     "require": {
         "php": ">=7.0",
         "ext-json": "*",
-        "ext-curl": "*",
-        "php-curl-class/php-curl-class": "^9.4"
+        "ext-curl": "*"
     },
     "autoload": {
         "psr-4": {
