@@ -1,6 +1,11 @@
 # PayPal - Upload Tracking
 
-[![Latest Stable Version](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/v)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![Total Downloads](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/downloads)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![Latest Unstable Version](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/v/unstable)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![License](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/license)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking) [![PHP Version Require](http://poser.pugx.org/nguyenanhung/paypal-upload-tracking/require/php)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking)
+[![Latest Stable Version](https://img.shields.io/packagist/v/nguyenanhung/paypal-upload-tracking.svg?style=flat-square)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking)
+[![Total Downloads](https://img.shields.io/packagist/dt/nguyenanhung/paypal-upload-tracking.svg?style=flat-square)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking)
+[![Daily Downloads](https://img.shields.io/packagist/dd/nguyenanhung/paypal-upload-tracking.svg?style=flat-square)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking)
+[![Monthly Downloads](https://img.shields.io/packagist/dm/nguyenanhung/paypal-upload-tracking.svg?style=flat-square)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking)
+[![License](https://img.shields.io/packagist/l/nguyenanhung/paypal-upload-tracking.svg?style=flat-square)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking)
+[![PHP Version Require](https://img.shields.io/packagist/dependency-v/nguyenanhung/paypal-upload-tracking/php)](https://packagist.org/packages/nguyenanhung/paypal-upload-tracking)
 
 Thư viện được thiết kế hỗ trợ duy nhất 1 việc Upload Tracking lên PayPal
 
